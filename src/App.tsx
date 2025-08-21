@@ -4,6 +4,7 @@ import Terms from "./Terms";
 import Refund from "./Refund";
 import Privacy from "./Privacy";
 import Contactus from "./Contactus";
+import Shipping from "./Shipping";
 export default function App() {
   return (
     <Routes>
@@ -12,6 +13,7 @@ export default function App() {
       <Route path="/refund-and-cancellation-policy" element={<Refund />} />
       <Route path="/privacy-policy" element={<Privacy />} />
       <Route path="/contactus" element={<Contactus />} />
+      <Route path="/shipping-policy" element={<Shipping />} />
     </Routes>
   )
 }

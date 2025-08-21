@@ -1,5 +1,4 @@
-import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
-import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
+import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
 
 function Home() {
@@ -92,7 +91,7 @@ function Home() {
               Proced to Payment
             </button>
 
-            <div className="flex justify-around text-sm text-blue-600">
+            <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
               <a href="/terms-and-conditions" className="hover:border-b">
                 Terms and Conditions
               </a>
@@ -104,6 +103,12 @@ function Home() {
               </a>
               <a href="/privacy-policy" className="hover:border-b">
                 Privacy Policy
+              </a>
+              <a href="/shipping-policy" className="hover:border-b">
+                Shipping Policy
+              </a>
+              <a href="/contactus" className="hover:border-b">
+                Contact Us
               </a>
             </div>
           </form>
