@@ -1,14 +1,8 @@
-import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
+import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
+import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
-import { useRazorpay } from "react-razorpay";
-
 
 function Home() {
-    const { Razorpay } = useRazorpay();
-
-    const onSubmit = async (e) => {
-
-    }
   return (
     <main className="bg-amber-50 text-gray-800 min-h-screen">
       <div className="max-w-3xl mx-auto px-4 py-10">
@@ -102,7 +96,10 @@ function Home() {
               <a href="/terms-and-conditions" className="hover:border-b">
                 Terms and Conditions
               </a>
-              <a href="/refund-and-cancellation-policy" className="hover:border-b">
+              <a
+                href="/refund-and-cancellation-policy"
+                className="hover:border-b"
+              >
                 Refund & Cancellation Policy
               </a>
               <a href="/privacy-policy" className="hover:border-b">
