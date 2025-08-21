@@ -1,13 +1,15 @@
+import { useState } from "react";
 import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
 
 function Home() {
+  const [quantity, setQuantity] = useState("1");
   return (
     <main className="bg-amber-50 text-gray-800 min-h-screen">
       <div className="max-w-3xl mx-auto px-4 py-10">
         <div className="bg-white p-6 rounded-2xl shadow-xl">
           <h1 className="text-3xl font-bold text-center text-orange-700 mb-6">
-            Pre-Order Golu Padi
+            Order Golu Padi
           </h1>
 
           <div className="grid gap-4 sm:grid-cols-3">
@@ -32,6 +34,9 @@ function Home() {
             <strong>Cardboard Golu Padi:</strong> 5-step, 2.5ft x 2.5ft x 2.5ft,
             0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per
             step.
+          </p>
+          <p className="mt-6 text-lg leading-relaxed">
+            <strong>Price Per Golu Padis:</strong> INR 1000
           </p>
 
           <form id="orderForm" className="mt-6 space-y-4">
@@ -78,8 +83,9 @@ function Home() {
                 type="number"
                 id="quantity"
                 min="1"
-                value="1"
                 required
+                value={quantity}
+                onChange={(e) => setQuantity(e.target.value)}
                 className="w-full px-4 py-2 border rounded-lg"
               />
             </div>
@@ -88,7 +94,7 @@ function Home() {
               type="submit"
               className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-lg font-bold transition"
             >
-              Proced to Payment
+              Pay ₹{parseInt(quantity) * 1000}
             </button>
 
             <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
