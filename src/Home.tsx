@@ -1,9 +1,103 @@
 import { useState } from "react";
-import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
+import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
+import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
+import axios from "axios";
+import { useRazorpay, type RazorpayOrderOptions } from "react-razorpay";
+import { useNavigate } from "react-router";
+
+const key_id = import.meta.env.VITE_RAZORPAY_KEY_ID;
+
+if (!key_id) {
+  throw new Error("Missing Razorpay API keys");
+}
+
+const loadScript = async (src: string) => {
+  return new Promise((resolve) => {
+    const script = document.createElement("script");
+    script.src = src;
+    script.async = true;
+    script.onload = () => {
+      resolve(script);
+    };
+    script.onerror = () => {
+      resolve(false);
+    };
+    document.body.appendChild(script);
+  });
+};
+
+const axiosService = axios.create({
+  baseURL: "https://5ply-backend.vercel.app",
+});
+
+const initialOrderCreate = async (item: {
+  title: string;
+  description: string;
+  price: number;
+}) => {
+  const response = await axiosService.post("/payment/order", item);
+  return response.data;
+};
+
+const verifyPayment = async (paymentPayload: {
+  orderCreationId: string;
+  razorpayPaymentId: string;
+  razorpayOrderId: string;
+}) => {
+  const response = await axiosService.post("/payment/success", paymentPayload);
+  return response.data;
+};
 
 function Home() {
   const [quantity, setQuantity] = useState("1");
+  const { Razorpay } = useRazorpay();
+  const router = useNavigate();
+  const onPurchase = async () => {
+    const response = await loadScript(
+      "https://checkout.razorpay.com/v1/checkout.js"
+    );
+    if (!response) {
+      alert("Script failed to load");
+      return;
+    }
+    const item = {
+      title: "Golu Padi",
+      description:
+        "5-step, 2.5ft x 2.5ft x 2.5ft, 0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per step.",
+      price: parseInt(quantity),
+    };
+
+    const orderCreation = await initialOrderCreate(item);
+
+    const options: RazorpayOrderOptions = {
+      key: key_id!,
+      amount: item.price * 100,
+      currency: "INR",
+      name: item.title,
+      description: item.description,
+      order_id: orderCreation.id,
+      handler: async function (response) {
+        const paymentPayload = {
+          orderCreationId: orderCreation.id,
+          razorpayPaymentId: response.razorpay_payment_id,
+          razorpayOrderId: response.razorpay_order_id,
+          razorpaySignature: response.razorpay_signature,
+        };
+
+        const result = await verifyPayment(paymentPayload);
+        if (result) {
+          router("/success/" + orderCreation.id);
+        } else {
+          router("/failure");
+        }
+      },
+    };
+
+    const paymentObject = new Razorpay(options);
+    paymentObject.open();
+  };
+
   return (
     <main className="bg-amber-50 text-gray-800 min-h-screen">
       <div className="max-w-3xl mx-auto px-4 py-10">
@@ -93,6 +187,7 @@ function Home() {
             <button
               type="submit"
               className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-lg font-bold transition"
+              onClick={onPurchase}
             >
               Pay ₹{parseInt(quantity) * 1000}
             </button>

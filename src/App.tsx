@@ -5,6 +5,8 @@ import Refund from "./Refund";
 import Privacy from "./Privacy";
 import Contactus from "./Contactus";
 import Shipping from "./Shipping";
+import Success from "./Success";
+import Failure from "./Failure";
 export default function App() {
   return (
     <Routes>
@@ -13,7 +15,9 @@ export default function App() {
       <Route path="/refund-and-cancellation-policy" element={<Refund />} />
       <Route path="/privacy-policy" element={<Privacy />} />
       <Route path="/contactus" element={<Contactus />} />
-      <Route path="/shipping-policy" element={<Shipping />} />
+      <Route path="/shipping-policy" element={<Shipping />} />\
+      <Route path="/success/:id" element={<Success />} />
+      <Route path="/failure" element={<Failure />} />
     </Routes>
   )
 }
