@@ -1,5 +1,4 @@
-import { useState } from "react";
-import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
+import { useState } from "react";import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
 import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
 import axios from "axios";
@@ -54,6 +53,10 @@ function Home() {
   const { Razorpay } = useRazorpay();
   const router = useNavigate();
   const onPurchase = async () => {
+    if (parseInt(quantity) < 1) {
+      alert("Please enter a valid quantity");
+      return;
+    }
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -65,7 +68,7 @@ function Home() {
       title: "Golu Padi",
       description:
         "5-step, 2.5ft x 2.5ft x 2.5ft, 0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per step.",
-      price: parseInt(quantity),
+      price: parseInt(quantity) * 1000,
     };
 
     const orderCreation = await initialOrderCreate(item);
