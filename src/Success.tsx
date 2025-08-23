@@ -1,4 +1,5 @@
-import { useNavigate, useParams } from "react-router";export default function Success() {
+import { useNavigate, useParams } from "react-router";
+export default function Success() {
   const params = useParams();
   const navigate = useNavigate();
   return (
@@ -8,6 +9,10 @@ import { useNavigate, useParams } from "react-router";export default function Su
           Payment Successful
         </h1>
         <p>Thank you for your order.</p>
+        <p>
+          We've opened WhatsApp for you to complete the order. We'll contact you
+          shortly.
+        </p>
         <p>Your order ID is: {params.id}</p>
         <button
           type="button"

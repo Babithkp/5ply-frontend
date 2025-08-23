@@ -1,4 +1,5 @@
-import { useState } from "react";import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
+import { useState } from "react";
+import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
 import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
 import axios from "axios";
@@ -48,15 +49,39 @@ const verifyPayment = async (paymentPayload: {
   return response.data;
 };
 
+const uploadToGoogleSheet = async (data: {
+  orderId: string;
+  name: string;
+  phone: string;
+  address: string;
+  quantity: string;
+}) => {
+  try {
+    const response = await axios.post(
+      "https://script.google.com/macros/s/AKfycbywWQsw7WaCgEjJR2cwduzXwJ2XUdo2NkPe3S-3lDj7rsq5Xou4TrUYLmPYR9eoIgEBWQ/exec",
+      data
+    );
+    return response;
+  } catch (error) {
+    console.log(error);
+  }
+};
+
 function Home() {
   const [quantity, setQuantity] = useState("1");
+  const [name, setName] = useState("");
+  const [phone, setPhone] = useState("");
+  const [address, setAddress] = useState("");
+  const [loading, setLoading] = useState(false);
   const { Razorpay } = useRazorpay();
   const router = useNavigate();
+
   const onPurchase = async () => {
     if (parseInt(quantity) < 1) {
       alert("Please enter a valid quantity");
       return;
     }
+    setLoading(true);
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -90,7 +115,18 @@ function Home() {
 
         const result = await verifyPayment(paymentPayload);
         if (result) {
-          router("/success/" + orderCreation.id);
+          const data = {
+            orderId: orderCreation.id,
+            name: name,
+            phone: phone,
+            address: address,
+            quantity: quantity,
+          };
+          const result = await uploadToGoogleSheet(data);
+          if (result) {
+            console.log(result);
+            router("/success/" + orderCreation.id);
+          }
         } else {
           router("/failure");
         }
@@ -99,6 +135,7 @@ function Home() {
 
     const paymentObject = new Razorpay(options);
     paymentObject.open();
+    setLoading(false);
   };
 
   return (
@@ -146,6 +183,8 @@ function Home() {
                 id="name"
                 required
                 className="w-full px-4 py-2 border rounded-lg"
+                value={name}
+                onChange={(e) => setName(e.target.value)}
               />
             </div>
 
@@ -158,6 +197,8 @@ function Home() {
                 id="phone"
                 required
                 className="w-full px-4 py-2 border rounded-lg"
+                value={phone}
+                onChange={(e) => setPhone(e.target.value)}
               />
             </div>
 
@@ -169,6 +210,8 @@ function Home() {
                 id="address"
                 required
                 className="w-full px-4 py-2 border rounded-lg"
+                value={address}
+                onChange={(e) => setAddress(e.target.value)}
               ></textarea>
             </div>
 
@@ -191,8 +234,9 @@ function Home() {
               type="submit"
               className="w-full bg-green-500 hover:bg-green-600 text-white py-3 rounded-xl text-lg font-bold transition"
               onClick={onPurchase}
+              disabled={loading}
             >
-              Pay ₹{parseInt(quantity) * 1000}
+              {loading ? "Loading..." : "Pay ₹" + parseInt(quantity) * 1000}
             </button>
 
             <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
@@ -216,19 +260,6 @@ function Home() {
               </a>
             </div>
           </form>
-
-          <div id="thankYou" className="hidden text-center mt-8 px-4">
-            <h2 className="text-2xl font-bold text-green-600 mb-4">
-              Thank you for your pre-order!
-            </h2>
-            <p className="text-gray-700 mb-4">
-              We've opened WhatsApp for you to complete the order. We'll contact
-              you shortly.
-            </p>
-            <p className="font-semibold text-lg text-gray-900">
-              Your Order ID: <span id="orderIdDisplay"></span>
-            </p>
-          </div>
         </div>
       </div>
     </main>
