@@ -73,6 +73,10 @@ function Home() {
   const router = useNavigate();
 
   const onPurchase = async () => {
+    if(name === "" || phone === "" || address === "" || quantity === ""){
+      alert("Please fill all the fields");
+      return;
+    }
     if (parseInt(quantity) < 1) {
       alert("Please enter a valid quantity");
       return;
