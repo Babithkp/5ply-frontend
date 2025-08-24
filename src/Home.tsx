@@ -1,5 +1,4 @@
-import { useState } from "react";
-import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
+import { useState } from "react";import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
 import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
 import axios from "axios";
@@ -50,17 +49,14 @@ const verifyPayment = async (paymentPayload: {
 };
 
 const uploadToGoogleSheet = async (data: {
-  orderId: string;
-  name: string;
-  phone: string;
-  address: string;
-  quantity: string;
+  OrderId: string;
+  Name: string;
+  Phone: string;
+  Address: string;
+  Quantity: string;
 }) => {
   try {
-    const response = await axios.post(
-      "https://script.google.com/macros/s/AKfycbywWQsw7WaCgEjJR2cwduzXwJ2XUdo2NkPe3S-3lDj7rsq5Xou4TrUYLmPYR9eoIgEBWQ/exec",
-      data
-    );
+    const response = await axiosService.post("/payment/capture", data);
     return response;
   } catch (error) {
     console.log(error);
@@ -116,15 +112,16 @@ function Home() {
         const result = await verifyPayment(paymentPayload);
         if (result) {
           const data = {
-            orderId: orderCreation.id,
-            name: name,
-            phone: phone,
-            address: address,
-            quantity: quantity,
+            OrderId: orderCreation.id,
+            Name: name,
+            Phone: phone,
+            Address: address,
+            Quantity: quantity,
           };
+          setLoading(true);
           const result = await uploadToGoogleSheet(data);
+          setLoading(false);
           if (result) {
-            console.log(result);
             router("/success/" + orderCreation.id);
           }
         } else {
