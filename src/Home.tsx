@@ -50,7 +50,7 @@ const verifyPayment = async (paymentPayload: {
 };
 
 const uploadToGoogleSheet = async (data: {
-  OrderId: string;
+  OrderId?: string;
   Name: string;
   Phone: string;
   Address: string;
@@ -83,6 +83,13 @@ function Home() {
       return;
     }
     setLoading(true);
+    const data = {
+      Name: name,
+      Phone: phone,
+      Address: address,
+      Quantity: quantity,
+    };
+     await uploadToGoogleSheet(data);
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
