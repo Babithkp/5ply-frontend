@@ -29,6 +29,7 @@ const loadScript = async (src: string) => {
 
 const axiosService = axios.create({
   baseURL: "https://5ply-backend.vercel.app",
+  // baseURL: "http://localhost:3000",
 });
 
 const initialOrderCreate = async (item: {
@@ -101,7 +102,7 @@ function Home() {
       title: "Andal Packaging Industries",
       description:
         "5-step, 2.5ft x 2.5ft x 2.5ft, 0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per step.",
-      price: parseInt(quantity),
+      price: parseInt(quantity) * 1000,
     };
 
     const orderCreation = await initialOrderCreate(item);
@@ -135,6 +136,7 @@ function Home() {
           const result = await uploadToGoogleSheet(data);
           setLoading(false);
           if (result) {
+            router("/success");
             const waURL = `https://wa.me/919620423719?text=${encodeURIComponent(
               message
             )}`;
