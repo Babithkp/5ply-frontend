@@ -137,7 +137,7 @@ function Home() {
           setLoading(false);
           if (result) {
             router("/success");
-            const waURL = `https://wa.me/919620423719?text=${encodeURIComponent(
+            const waURL = `https://wa.me/919894196788?text=${encodeURIComponent(
               message
             )}`;
             window.open(waURL, "_blank");
