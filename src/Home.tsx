@@ -1,5 +1,5 @@
 import { useState } from "react";
-import img1 from "./assets/Cardboard Golupadi Side View empty Brown.jpg";
+import img1 from "./assets/decorated-image.jpg";
 import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
 import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
 import axios from "axios";
@@ -165,7 +165,7 @@ function Home() {
             <img
               src={img1}
               alt="Golu Padi Empty"
-              className="w-full h-48 object-contain rounded-xl shadow bg-white"
+              className="h-48 object-contain rounded-xl shadow "
             />
             <img
               src={img2}
