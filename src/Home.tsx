@@ -102,7 +102,7 @@ function Home() {
       title: "Andal Packaging Industries",
       description:
         "5-step, 2.5ft x 2.5ft x 2.5ft, 0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per step.",
-      price: parseInt(quantity),
+      price: parseInt(quantity) * 1000,
     };
 
     const orderCreation = await initialOrderCreate(item);
