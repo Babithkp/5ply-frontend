@@ -136,7 +136,7 @@ function Home() {
           const result = await uploadToGoogleSheet(data);
           setLoading(false);
           if (result) {
-            router("/success");
+            router(`/success/${orderCreation.id}`);
             const waURL = `https://wa.me/919894196788?text=${encodeURIComponent(
               message
             )}`;
