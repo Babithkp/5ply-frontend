@@ -84,13 +84,6 @@ function Home() {
       return;
     }
     setLoading(true);
-    const data = {
-      Name: name,
-      Phone: phone,
-      Address: address,
-      Quantity: quantity,
-    };
-     await uploadToGoogleSheet(data);
     const response = await loadScript(
       "https://checkout.razorpay.com/v1/checkout.js"
     );
@@ -137,7 +130,7 @@ function Home() {
           setLoading(false);
           if (result) {
             router(`/success/${orderCreation.id}`);
-            const waURL = `https://wa.me/919894196788?text=${encodeURIComponent(
+            const waURL = `https://wa.me/918220626325?text=${encodeURIComponent(
               message
             )}`;
             window.location.href = waURL;
@@ -219,7 +212,7 @@ function Home() {
 
             <div>
               <label className="block font-semibold" htmlFor="address">
-                Delivery Address
+                Delivery Address (with pincode)
               </label>
               <textarea
                 id="address"
