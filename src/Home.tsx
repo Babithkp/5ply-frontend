@@ -1,7 +1,6 @@
 import { useState } from "react";
-import img1 from "./assets/decorated-image.jpg";
-import img2 from "./assets/Cardboard Golupadi with golu Dolls.jpg";
-import img3 from "./assets/Cardboard Golupadi with Measurement.jpg";
+import img3 from "./assets/Outofstock.png";
+import img1 from "./assets/white-cardboard.jpg";
 import axios from "axios";
 import { useRazorpay, type RazorpayOrderOptions } from "react-razorpay";
 import { useNavigate } from "react-router";
@@ -95,7 +94,7 @@ function Home() {
       title: "Andal Packaging Industries",
       description:
         "5-step, 2.5ft x 2.5ft x 2.5ft, 0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per step.",
-      price: parseInt(quantity) * 1000,
+      price: parseInt(quantity) * 1300,
     };
 
     const orderCreation = await initialOrderCreate(item);
@@ -153,17 +152,18 @@ function Home() {
           <h1 className="text-3xl font-bold text-center text-orange-700 mb-6">
             Order Golu Padi
           </h1>
+          <p className="mt-4 text-lg leading-relaxed text-green-500 text-center font-medium">
+            Thank you for your order and continued support
+          </p>
+          <p className="mb-4 text-lg leading-relaxed text-green-500 text-center font-medium">
+            we truly value your trust in us
+          </p>
 
-          <div className="grid gap-4 sm:grid-cols-3">
+          <div className="grid gap-4 sm:grid-cols-2">
             <img
               src={img1}
-              alt="Golu Padi Empty"
+              alt="white cardboard"
               className="h-48 w-full object-contain rounded-xl shadow "
-            />
-            <img
-              src={img2}
-              alt="Golu Padi with Dolls"
-              className="w-full h-48 object-contain rounded-xl shadow bg-white"
             />
             <img
               src={img3}
@@ -177,8 +177,16 @@ function Home() {
             0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per
             step.
           </p>
+          
+
+          <p className="mt-6 text-lg leading-relaxed text-orange-700 font-medium">
+            Currently the brown color golu padi is out of stock
+          </p>
           <p className="mt-6 text-lg leading-relaxed">
-            <strong>Price Per Golu Padis:</strong> INR 1000
+            You can order the white golu padis, and its a limited stock item.
+          </p>
+          <p className="mt-6 text-lg leading-relaxed">
+            <strong>Price Per Golu Padis (white):</strong> INR 1300
           </p>
 
           <form id="orderForm" className="mt-6 space-y-4">
@@ -244,7 +252,7 @@ function Home() {
               onClick={onPurchase}
               disabled={loading}
             >
-              {loading ? "Loading..." : "Pay ₹" + parseInt(quantity) * 1000}
+              {loading ? "Loading..." : "Pay ₹" + parseInt(quantity) * 1300}
             </button>
 
             <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
