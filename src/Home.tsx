@@ -1,5 +1,4 @@
-import { useState } from "react";
-import img3 from "./assets/Outofstock.png";
+import { useState } from "react";import img3 from "./assets/Outofstock.png";
 import img1 from "./assets/white-cardboard.jpg";
 import axios from "axios";
 import { useRazorpay, type RazorpayOrderOptions } from "react-razorpay";
@@ -177,7 +176,16 @@ function Home() {
             0.5ft per step. Heavy-duty, DIY, foldable. Supports up to 20 kg per
             step.
           </p>
-          
+          <p className="mt-6 text-lg leading-relaxed">
+            For assembling related help refer this video:{" "}
+            <a
+              href="https://youtu.be/YR8LQELUOco"
+              target="_blank"
+              className="bg-green-500 p-2 rounded-lg text-white font-medium"
+            >
+              Video Link
+            </a>
+          </p>
 
           <p className="mt-6 text-lg leading-relaxed text-orange-700 font-medium">
             Currently the brown color golu padi is out of stock
