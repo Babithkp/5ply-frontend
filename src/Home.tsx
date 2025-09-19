@@ -1,6 +1,4 @@
-import img3 from "./assets/Outofstock.png";
-import img1 from "./assets/white-cardboard.jpg";
-
+import img3 from "./assets/Outofstock.png";import img1 from "./assets/white-cardboard.jpg";
 
 // const key_id = import.meta.env.VITE_RAZORPAY_KEY_ID;
 
@@ -269,27 +267,28 @@ function Home() {
               {loading ? "Loading..." : "Pay ₹" + parseInt(quantity) * 1300}
             </button>
 
-            <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
-              <a href="/terms-and-conditions" className="hover:border-b">
-                Terms and Conditions
-              </a>
-              <a
-                href="/refund-and-cancellation-policy"
-                className="hover:border-b"
-              >
-                Refund & Cancellation Policy
-              </a>
-              <a href="/privacy-policy" className="hover:border-b">
-                Privacy Policy
-              </a>
-              <a href="/shipping-policy" className="hover:border-b">
-                Shipping Policy
-              </a>
-              <a href="/contactus" className="hover:border-b">
-                Contact Us
-              </a>
-            </div>
+            
           </form> */}
+          <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
+            <a href="/terms-and-conditions" className="hover:border-b">
+              Terms and Conditions
+            </a>
+            <a
+              href="/refund-and-cancellation-policy"
+              className="hover:border-b"
+            >
+              Refund & Cancellation Policy
+            </a>
+            <a href="/privacy-policy" className="hover:border-b">
+              Privacy Policy
+            </a>
+            <a href="/shipping-policy" className="hover:border-b">
+              Shipping Policy
+            </a>
+            <a href="/contactus" className="hover:border-b">
+              Contact Us
+            </a>
+          </div>
         </div>
       </div>
     </main>
