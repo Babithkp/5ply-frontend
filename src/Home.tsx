@@ -269,7 +269,7 @@ function Home() {
 
             
           </form> */}
-          <div className="flex justify-around text-sm text-blue-60 max-md:flex-col">
+          <div className="flex justify-around text-sm text-blue-60 max-md:flex-col mt-10">
             <a href="/terms-and-conditions" className="hover:border-b">
               Terms and Conditions
             </a>
