@@ -128,7 +128,7 @@ function Home() {
           setLoading(false);
           if (result) {
             router(`/success/${orderCreation.id}`);
-            const waURL = `https://wa.me/918220626325?text=${encodeURIComponent(
+            const waURL = `whatsapp://send?phone=918220626325&text=${encodeURIComponent(
               message,
             )}`;
             window.location.href = waURL;
